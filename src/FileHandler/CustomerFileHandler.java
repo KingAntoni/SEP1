@@ -22,10 +22,10 @@ public class CustomerFileHandler {
         saveAllCustomers(customers);
     }
 
-    public Customer read(String name) {
+    public Customer read(String email) {
         List<Customer> customers = getAllCustomers();
         for (Customer customer : customers) {
-            if (customer.getName().equals(name)) {
+            if (customer.getEmail().equals(email)) {
                 return customer;
             }
         }
@@ -36,7 +36,7 @@ public class CustomerFileHandler {
         List<Customer> customers = getAllCustomers();
         for (int i = 0; i < customers.size(); i++) {
             Customer customer = customers.get(i);
-            if (customer.getName().equals(updatedCustomer.getName())) {
+            if (customer.getEmail().equals(updatedCustomer.getEmail())) {
                 customers.set(i, updatedCustomer);
                 saveAllCustomers(customers);
                 return;
@@ -44,11 +44,11 @@ public class CustomerFileHandler {
         }
     }
 
-    public void delete(String name) {
+    public void delete(String email) {
         List<Customer> customers = getAllCustomers();
         for (int i = 0; i < customers.size(); i++) {
             Customer customer = customers.get(i);
-            if (customer.getName().equals(name)) {
+            if (customer.getEmail().equals(email)) {
                 customers.remove(i);
                 saveAllCustomers(customers);
                 return;
@@ -68,6 +68,10 @@ public class CustomerFileHandler {
             e.printStackTrace();
         }
         return customers;
+    }
+
+    public List<Customer> readAll() {
+        return getAllCustomers();
     }
 
     private void saveAllCustomers(List<Customer> customers) {

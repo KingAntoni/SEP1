@@ -1,49 +1,26 @@
 package Controller.Bus;
 
-
 import Controller.ViewHandler;
-import Model.Bus;
 import Model.ModelManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 
-public class BusMainViewController {
+public class EditBusController {
     private Region root;
     private ViewHandler viewHandler;
     private ModelManager modelManager;
-    @FXML
-    TableView<Bus> busTable;
-
-    @FXML
-    private TableColumn<Bus, String> typeColumn;
-
-    @FXML
-    private TableColumn<Bus, Integer> numberOfSeatsColumn;
-
-
+    private String busID;
     public void init(ViewHandler viewHandler, ModelManager modelManager,Region root){
         this.viewHandler=viewHandler;
         this.modelManager=modelManager;
         this.root=root;
+        this.busID=root.getUserData().toString();
     }
 
     @FXML
     public void backButtonPressed(){
-        viewHandler.openView("mainFXML");
-    }
-    @FXML
-    public void addBusButtonPressed(){
-        viewHandler.openView("addBus");
-    }
-    @FXML
-    public void editBusButtonPressed(){
-        viewHandler.openView("editBus");
-    }
-    @FXML
-    public void deleteBusButtonPressed(){
-
+        viewHandler.openView("BusMainView");
     }
 
     public void reset() {
@@ -52,4 +29,9 @@ public class BusMainViewController {
     public javafx.scene.layout.Region getRoot() {
         return root;
     }
+
+    @FXML
+    public void saveButtonPressed(ActionEvent actionEvent) {
+    }
 }
+

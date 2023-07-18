@@ -11,6 +11,7 @@ public class Main extends Application {
 
         ModelManager modelManager = new ModelManager();
         ViewHandler viewHandler = new ViewHandler(modelManager);
+
         viewHandler.start(stage);
     }
 }

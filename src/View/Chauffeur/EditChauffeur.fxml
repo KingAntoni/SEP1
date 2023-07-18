@@ -6,15 +6,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Chauffeur.AddChauffeurController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Chauffeur.EditChauffeurController">
    <children>
       <Button layoutX="489.0" layoutY="324.0" mnemonicParsing="false" text="Button" />
       <MenuButton layoutX="37.0" layoutY="211.0" mnemonicParsing="false" text="Bus preference">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
+         <items>
+            <MenuItem mnemonicParsing="false" text="Action 1" />
+            <MenuItem mnemonicParsing="false" text="Action 2" />
+         </items>
       </MenuButton>
       <TextField layoutX="37.0" layoutY="65.0" text="First name" />
       <TextField layoutX="38.0" layoutY="114.0" text="Last name" />

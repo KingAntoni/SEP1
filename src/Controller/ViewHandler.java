@@ -2,12 +2,15 @@ package Controller;
 
 import Controller.Bus.AddBusController;
 import Controller.Bus.BusMainViewController;
+import Controller.Bus.EditBusController;
 import Controller.Chauffeur.AddChauffeurController;
 import Controller.Chauffeur.ChauffeurMainViewController;
+import Controller.Chauffeur.EditChauffeurController;
 import Controller.Customer.AddCustomerController;
 import Controller.Customer.CustomerMainViewController;
-import Controller.MainFXMLController;
+import Controller.Customer.EditCustomerController;
 import Controller.Trip.AddTripController;
+import Controller.Trip.EditTripController;
 import Controller.Trip.TripMainViewController;
 import Model.ModelManager;
 import javafx.fxml.FXMLLoader;
@@ -21,12 +24,16 @@ public class ViewHandler {
     private ModelManager modelManager;
     private AddBusController addBusController;
     private BusMainViewController busMainViewController;
+    private EditBusController editBusController;
     private AddChauffeurController addChauffeurController;
     private ChauffeurMainViewController chauffeurMainViewController;
+    private EditChauffeurController editChauffeurController;
     private AddCustomerController addCustomerController;
     private CustomerMainViewController customerMainViewController;
+    private EditCustomerController editCustomerController;
     private AddTripController addTripController;
     private TripMainViewController tripMainViewController;
+    private EditTripController editTripController;
     private MainFXMLController mainFXMLController;
 
     public ViewHandler(ModelManager modelManager)
@@ -56,6 +63,12 @@ public class ViewHandler {
             case "addTrip" ->root = loadAddTrip("/View/Trip/AddTrip.fxml");
             case "tripMainView" ->root = loadTripMainView("/View/Trip/TripMainView.fxml");
         }
+        setStage(root);
+
+    }
+
+    public void setStage(Region root)
+    {
         currentScene.setRoot(root);
 
         String title = "VIABus";
@@ -69,6 +82,25 @@ public class ViewHandler {
         primaryStage.setHeight(root.getPrefHeight());
         primaryStage.show();
     }
+
+    public void openView(String id, String objectID)
+    {
+        Region root = null;
+
+        switch (id)
+        {
+            case "editBus" -> root =loadEditBus("/View/Bus/EditBus.fxml");
+            case "editChauffeur" -> root =loadEditChauffeur("/View/Chauffeur/EditChauffeur.fxml");
+            case "editCustomer" -> root =loadEditCustomer("/View/Customer/EditCustomer.fxml",objectID);
+            case "editTrip" -> root =loadEditTrip("/View/Trip/EditTrip.fxml");
+        }
+        setStage(root);
+    }
+
+
+
+
+
     private Region loadMainFXML(String fxmlFile) {
         if (mainFXMLController == null) {
             try {
@@ -126,6 +158,27 @@ public class ViewHandler {
         }
         return busMainViewController.getRoot();
     }
+
+    private Region loadEditBus(String fxmlFile) {
+        if (editBusController == null) {
+            try {
+                System.out.println(fxmlFile);
+                FXMLLoader loader = new FXMLLoader();
+
+                loader.setLocation(getClass().getResource(fxmlFile));
+                Region root = loader.load();
+                editBusController = loader.getController();
+                editBusController.init(this, modelManager, root);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        } else {
+            editBusController.reset();
+        }
+        return editBusController.getRoot();
+    }
+
     private Region loadAddChauffeur(String fxmlFile) {
         if (addChauffeurController == null) {
             try {
@@ -164,6 +217,27 @@ public class ViewHandler {
         }
         return chauffeurMainViewController.getRoot();
     }
+
+    private Region loadEditChauffeur(String fxmlFile) {
+        if (editChauffeurController == null) {
+            try {
+                System.out.println(fxmlFile);
+                FXMLLoader loader = new FXMLLoader();
+
+                loader.setLocation(getClass().getResource(fxmlFile));
+                Region root = loader.load();
+                editChauffeurController = loader.getController();
+                editChauffeurController.init(this, modelManager, root);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        } else {
+            editChauffeurController.reset();
+        }
+        return editChauffeurController.getRoot();
+    }
+
     private Region loadAddCustomer(String fxmlFile) {
         if (addCustomerController == null) {
             try {
@@ -202,6 +276,27 @@ public class ViewHandler {
         }
         return customerMainViewController.getRoot();
     }
+
+    private Region loadEditCustomer(String fxmlFile, String customerId) {
+        if (editCustomerController == null) {
+            try {
+                System.out.println(fxmlFile);
+                FXMLLoader loader = new FXMLLoader();
+
+                loader.setLocation(getClass().getResource(fxmlFile));
+                Region root = loader.load();
+                editCustomerController = loader.getController();
+                editCustomerController.init(this, modelManager, root, customerId);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        } else {
+            editCustomerController.reset();
+        }
+        return editCustomerController.getRoot();
+    }
+
     private Region loadAddTrip(String fxmlFile) {
         if (addTripController == null) {
             try {
@@ -221,6 +316,27 @@ public class ViewHandler {
         }
         return addTripController.getRoot();
     }
+
+    private Region loadEditTrip(String fxmlFile) {
+        if (editTripController == null) {
+            try {
+                System.out.println(fxmlFile);
+                FXMLLoader loader = new FXMLLoader();
+
+                loader.setLocation(getClass().getResource(fxmlFile));
+                Region root = loader.load();
+                editTripController = loader.getController();
+                editTripController.init(this, modelManager, root);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        } else {
+            editTripController.reset();
+        }
+        return editTripController.getRoot();
+    }
+
     private Region loadTripMainView(String fxmlFile) {
         if (tripMainViewController == null) {
             try {

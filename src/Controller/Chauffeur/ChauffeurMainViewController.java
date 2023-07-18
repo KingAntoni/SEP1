@@ -34,11 +34,11 @@ public class ChauffeurMainViewController {
 
     @FXML
     public void addChauffeurButtonPressed(){
-
+        viewHandler.openView("addChauffeur");
     }
     @FXML
     public void editChauffeurButtonPressed(){
-
+        viewHandler.openView("editChauffeur");
     }
     @FXML
     public void deleteChauffeurButtonPressed(){

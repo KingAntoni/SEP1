@@ -12,11 +12,12 @@ public class ModelManager {
     private BusFileHandler busFileHandler;
     private TripFileHandler tripFileHandler;
 
+
     public ModelManager() {
-        this.customerFileHandler = new CustomerFileHandler("Database.CustomerFileDB");
-        this.chauffeurFileHandler = new ChauffeurFileHandler("Database.ChauffeurFileDB");
-        this.busFileHandler = new BusFileHandler("Database.BusFileDB");
-        this.tripFileHandler = new TripFileHandler("Database.TripFileDB");
+        this.customerFileHandler = new CustomerFileHandler("src/Database/CustomerFileDB.txt");
+        this.chauffeurFileHandler = new ChauffeurFileHandler("/Database/ChauffeurFileDB.txt");
+        this.busFileHandler = new BusFileHandler("/Database/BusFileDB.txt");
+        this.tripFileHandler = new TripFileHandler("/Database/TripFileDB.txt");
     }
 
     // Customer methods
@@ -28,12 +29,16 @@ public class ModelManager {
         return customerFileHandler.read(name);
     }
 
+    public List<Customer> readAllCustomers() {
+        return customerFileHandler.readAll();
+    }
+
     public void updateCustomer(Customer updatedCustomer) {
         customerFileHandler.update(updatedCustomer);
     }
 
-    public void deleteCustomer(String name) {
-        customerFileHandler.delete(name);
+    public void deleteCustomer(String email) {
+        customerFileHandler.delete(email);
     }
 
     // Chauffeur methods
