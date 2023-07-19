@@ -9,10 +9,12 @@
 
 <AnchorPane prefHeight="430.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/18.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus.BusMainViewController">
    <children>
-      <TableView fx:id="busTable" layoutX="30.0" layoutY="27.0" prefHeight="341.0" prefWidth="305.0">
+      <TableView fx:id="busTableView" layoutX="30.0" layoutY="27.0" prefHeight="341.0" prefWidth="305.0">
          <columns>
-            <TableColumn fx:id="typeColumn" text="Type" />
+            <TableColumn fx:id="nameColumn" text="Name" />
+            <TableColumn fx:id="regNumberColumn" text="Licence Plate" />
             <TableColumn fx:id="numberOfSeatsColumn" text="Number of Seats" />
+            <TableColumn fx:id="typeColumn" text="Type" />
          </columns>
       </TableView>
       <Text layoutX="367.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Buses">

@@ -15,9 +15,9 @@ public class ModelManager {
 
     public ModelManager() {
         this.customerFileHandler = new CustomerFileHandler("src/Database/CustomerFileDB.txt");
-        this.chauffeurFileHandler = new ChauffeurFileHandler("/Database/ChauffeurFileDB.txt");
-        this.busFileHandler = new BusFileHandler("/Database/BusFileDB.txt");
-        this.tripFileHandler = new TripFileHandler("/Database/TripFileDB.txt");
+        this.chauffeurFileHandler = new ChauffeurFileHandler("src/Database/ChauffeurFileDB.txt");
+        this.busFileHandler = new BusFileHandler("src/Database/BusFileDB.txt");
+        this.tripFileHandler = new TripFileHandler("src/Database/TripFileDB.txt");
     }
 
     // Customer methods
@@ -63,16 +63,20 @@ public class ModelManager {
         busFileHandler.create(bus);
     }
 
-    public Bus readBus(String type) {
-        return busFileHandler.read(type);
+    public Bus readBus(String licencePlate) {
+        return busFileHandler.read(licencePlate);
+    }
+
+    public List<Bus> readAllBuses() {
+        return busFileHandler.readAll();
     }
 
     public void updateBus(Bus updatedBus) {
         busFileHandler.update(updatedBus);
     }
 
-    public void deleteBus(String type) {
-        busFileHandler.delete(type);
+    public void deleteBus(String licencePlate) {
+        busFileHandler.delete(licencePlate);
     }
 
     // Trip methods

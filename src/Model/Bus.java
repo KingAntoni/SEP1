@@ -1,45 +1,36 @@
 package Model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Bus {
-    public enum BusType {
-        PartyBus,
-        SchoolBus,
-        RegularBus
+
+    SimpleStringProperty name;
+    SimpleObjectProperty<BusType> type;
+    SimpleIntegerProperty numberOfSeats;
+    SimpleStringProperty regNumber;
+
+    public Bus(BusType type, int numberOfSeats, String regNumber, String name) {
+        this.type = new SimpleObjectProperty<>(type);
+        this.numberOfSeats = new SimpleIntegerProperty(numberOfSeats);
+        this.regNumber = new SimpleStringProperty(regNumber);
+        this.name = new SimpleStringProperty(name);
     }
 
-    private BusType type;
-    private int numberOfSeats;
-    private String id;
-
-    public Bus(BusType type, int numberOfSeats, String id) {
-        this.type = type;
-        this.numberOfSeats = numberOfSeats;
-        this.id = id;
-    }
-
-
-    public BusType getType() {
-        return type;
-    }
-
-    public void setType(BusType type) {
-        this.type = type;
-    }
-
-    public int getNumberOfSeats() {
+    public SimpleIntegerProperty numberOfSeatsProperty() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
+    public SimpleStringProperty regNumberProperty() {
+        return regNumber;
     }
 
-    public String getId() {
-        return id;
+    public SimpleObjectProperty<BusType> typeProperty()  { return type; }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 }
 

@@ -89,7 +89,7 @@ public class ViewHandler {
 
         switch (id)
         {
-            case "editBus" -> root =loadEditBus("/View/Bus/EditBus.fxml");
+            case "editBus" -> root =loadEditBus("/View/Bus/EditBus.fxml", objectID);
             case "editChauffeur" -> root =loadEditChauffeur("/View/Chauffeur/EditChauffeur.fxml");
             case "editCustomer" -> root =loadEditCustomer("/View/Customer/EditCustomer.fxml",objectID);
             case "editTrip" -> root =loadEditTrip("/View/Trip/EditTrip.fxml");
@@ -159,7 +159,7 @@ public class ViewHandler {
         return busMainViewController.getRoot();
     }
 
-    private Region loadEditBus(String fxmlFile) {
+    private Region loadEditBus(String fxmlFile, String licencePlate) {
         if (editBusController == null) {
             try {
                 System.out.println(fxmlFile);
@@ -168,7 +168,7 @@ public class ViewHandler {
                 loader.setLocation(getClass().getResource(fxmlFile));
                 Region root = loader.load();
                 editBusController = loader.getController();
-                editBusController.init(this, modelManager, root);
+                editBusController.init(this, modelManager, root, licencePlate);
             } catch (Exception e) {
 
                 e.printStackTrace();

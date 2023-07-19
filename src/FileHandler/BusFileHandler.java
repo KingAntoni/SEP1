@@ -24,7 +24,7 @@ public class BusFileHandler {
     public Bus read(String type) {
         List<Bus> buses = getAllBuses();
         for (Bus bus : buses) {
-            if (bus.getType().name().equalsIgnoreCase(type)) {
+            if (bus.regNumberProperty().get().equalsIgnoreCase(type)) {
                 return bus;
             }
         }
@@ -35,7 +35,7 @@ public class BusFileHandler {
         List<Bus> buses = getAllBuses();
         for (int i = 0; i < buses.size(); i++) {
             Bus bus = buses.get(i);
-            if (bus.getType() == updatedBus.getType()) {
+            if (bus.regNumberProperty().getValue().equals(updatedBus.regNumberProperty().getValue())) {
                 buses.set(i, updatedBus);
                 saveAllBuses(buses);
                 return;
@@ -43,16 +43,20 @@ public class BusFileHandler {
         }
     }
 
-    public void delete(String type) {
+    public void delete(String licencePlate) {
         List<Bus> buses = getAllBuses();
         for (int i = 0; i < buses.size(); i++) {
             Bus bus = buses.get(i);
-            if (bus.getType().name().equalsIgnoreCase(type)) {
+            if (bus.regNumberProperty().getValue().equalsIgnoreCase(licencePlate)) {
                 buses.remove(i);
                 saveAllBuses(buses);
                 return;
             }
         }
+    }
+
+    public List<Bus> readAll() {
+        return getAllBuses();
     }
 
     private List<Bus> getAllBuses() {
