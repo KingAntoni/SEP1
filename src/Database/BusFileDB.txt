@@ -1,0 +1,1 @@
+{"name":{"name":"","value":"DaBus","valid":true},"type":{"name":"","value":"PARTY_BUS","valid":true},"numberOfSeats":{"name":"","value":69,"valid":true},"regNumber":{"name":"","value":"42069","valid":true}}

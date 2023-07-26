@@ -90,9 +90,9 @@ public class ViewHandler {
         switch (id)
         {
             case "editBus" -> root =loadEditBus("/View/Bus/EditBus.fxml", objectID);
-            case "editChauffeur" -> root =loadEditChauffeur("/View/Chauffeur/EditChauffeur.fxml");
+            case "editChauffeur" -> root =loadEditChauffeur("/View/Chauffeur/EditChauffeur.fxml", objectID);
             case "editCustomer" -> root =loadEditCustomer("/View/Customer/EditCustomer.fxml",objectID);
-            case "editTrip" -> root =loadEditTrip("/View/Trip/EditTrip.fxml");
+            case "editTrip" -> root =loadEditTrip("/View/Trip/EditTrip.fxml",objectID);
         }
         setStage(root);
     }
@@ -218,7 +218,7 @@ public class ViewHandler {
         return chauffeurMainViewController.getRoot();
     }
 
-    private Region loadEditChauffeur(String fxmlFile) {
+    private Region loadEditChauffeur(String fxmlFile, String chauffeurId) {
         if (editChauffeurController == null) {
             try {
                 System.out.println(fxmlFile);
@@ -227,13 +227,13 @@ public class ViewHandler {
                 loader.setLocation(getClass().getResource(fxmlFile));
                 Region root = loader.load();
                 editChauffeurController = loader.getController();
-                editChauffeurController.init(this, modelManager, root);
+                editChauffeurController.init(this, modelManager, root, chauffeurId);
             } catch (Exception e) {
 
                 e.printStackTrace();
             }
         } else {
-            editChauffeurController.reset();
+            editChauffeurController.reset(chauffeurId);
         }
         return editChauffeurController.getRoot();
     }
@@ -292,7 +292,7 @@ public class ViewHandler {
                 e.printStackTrace();
             }
         } else {
-            editCustomerController.reset();
+            editCustomerController.reset(customerId);
         }
         return editCustomerController.getRoot();
     }
@@ -317,7 +317,7 @@ public class ViewHandler {
         return addTripController.getRoot();
     }
 
-    private Region loadEditTrip(String fxmlFile) {
+    private Region loadEditTrip(String fxmlFile, String tripId) {
         if (editTripController == null) {
             try {
                 System.out.println(fxmlFile);
@@ -326,13 +326,13 @@ public class ViewHandler {
                 loader.setLocation(getClass().getResource(fxmlFile));
                 Region root = loader.load();
                 editTripController = loader.getController();
-                editTripController.init(this, modelManager, root);
+                editTripController.init(this, modelManager, root, tripId);
             } catch (Exception e) {
 
                 e.printStackTrace();
             }
         } else {
-            editTripController.reset();
+            editTripController.reset(tripId);
         }
         return editTripController.getRoot();
     }

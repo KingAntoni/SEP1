@@ -4,6 +4,9 @@ import FileHandler.BusFileHandler;
 import FileHandler.ChauffeurFileHandler;
 import FileHandler.CustomerFileHandler;
 import FileHandler.TripFileHandler;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelManager {
@@ -25,8 +28,8 @@ public class ModelManager {
         customerFileHandler.create(customer);
     }
 
-    public Customer readCustomer(String name) {
-        return customerFileHandler.read(name);
+    public Customer readCustomer(String email) {
+        return customerFileHandler.read(email);
     }
 
     public List<Customer> readAllCustomers() {
@@ -80,8 +83,13 @@ public class ModelManager {
     }
 
     // Trip methods
-    public void createTrip(Trip trip) {
+    public void createTrip(String customerEmail, Chauffeur chauffeur, BusType busType, MyDate date, int numberOfDays , Location arrival, Location departure) {
+        Trip trip = new Trip(date,findBus(busType, date, numberOfDays) ,chauffeur, readCustomer(customerEmail) ,0,new Route(arrival , departure), numberOfDays);
         tripFileHandler.create(trip);
+    }
+
+    public Trip readTrip(String id) {
+        return tripFileHandler.readById(id);
     }
 
     public List<Trip> readAllTrips() {
@@ -94,5 +102,103 @@ public class ModelManager {
 
     public void deleteTrip(Trip trip) {
         tripFileHandler.delete(trip);
+    }
+
+    public List<Chauffeur> readAllChauffeurs() {
+      return  chauffeurFileHandler.readAll();
+    }
+
+    public ArrayList<Chauffeur> findChauffeurs(LocalDate selectedDate, BusType busType, int tripDuration) {
+        List<Chauffeur> chauffeurs = readAllChauffeurs();
+        List<Trip> trips = readAllTrips();
+        ArrayList<Chauffeur> availableChauffeurs = new ArrayList<>();
+
+
+        // Find available chauffeurs for each day of the trip
+        for (Chauffeur chauffeur : chauffeurs) {
+            boolean isAvailable = chauffeur.canDrive(busType);
+            for (Trip trip : trips) {
+                if (!isChauffeurAvailable(chauffeur, trip.getDateTime(), tripDuration)) {
+                    isAvailable = false;
+                    break;
+                }
+            }
+            if (isAvailable) {
+                availableChauffeurs.add(chauffeur);
+            }
+        }
+
+        return availableChauffeurs;
+    }
+
+    // Helper method to check if a chauffeur is available on a given date for a specific duration
+    private boolean isChauffeurAvailable(Chauffeur chauffeur, MyDate selectedDate, int tripDuration) {
+        // Assuming chauffeur availability is checked against their existing schedule
+        // You might have some other mechanism to check availability (e.g., from a database)
+
+        // For demonstration purposes, let's a soon the chauffeur is available if there are no conflicting trips
+        // within the specified duration from the selected date
+        for (Trip trip : getTripsForChauffeur(chauffeur)) {
+            if (trip.getDateTime().isEqual(selectedDate) || trip.getDateTime().isAfter(selectedDate)) {
+                if (trip.getDateTime().isBefore(selectedDate.plusDays(tripDuration))) {
+                    return false;
+                }
+            } else if (trip.getDateTime().isBefore(selectedDate)) {
+                if (trip.getDateTime().plusDays(trip.getNumberOfDays()).isAfter(selectedDate)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public ArrayList<Trip> getTripsForChauffeur(Chauffeur chauffeur) {
+        ArrayList<Trip> trips = new ArrayList<>();
+        for (Trip trip : readAllTrips()) {
+            if (trip.getChauffeur().equals(chauffeur)) {
+                trips.add(trip);
+            }
+        }
+        return trips;
+    }
+    private Bus findBus(BusType busType, MyDate date, int numberOfDays) {
+        List<Bus> buses = readAllBuses();
+
+
+        // Find available chauffeurs for each day of the trip
+        for (Bus bus : buses) {
+                if (isBusAvailable(bus, date, numberOfDays)) {
+                    return bus;
+                }
+        }
+
+        throw new IllegalArgumentException("No available bus found");
+    }
+
+    private boolean isBusAvailable(Bus bus, MyDate dateTime, int numberOfDays) {
+        for (Trip trip : getTripsForBus(bus)) {
+            if (trip.getDateTime().isEqual(dateTime) || trip.getDateTime().isAfter(dateTime)) {
+                if (trip.getDateTime().isBefore(dateTime.plusDays(numberOfDays))) {
+                    return false;
+                }
+            } else if (trip.getDateTime().isBefore(dateTime)) {
+                if (trip.getDateTime().plusDays(trip.getNumberOfDays()).isAfter(dateTime)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private ArrayList<Trip> getTripsForBus(Bus bus) {
+        ArrayList<Trip> trips = new ArrayList<>();
+        for (Trip trip : readAllTrips()) {
+            if (trip.getBus().equals(bus)) {
+                trips.add(trip);
+            }
+        }
+        return trips;
     }
 }

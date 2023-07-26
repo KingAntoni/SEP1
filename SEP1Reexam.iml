@@ -17,6 +17,19 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="JavaFX" level="application" />
-    <orderEntry type="library" exported="" name="gson-2.8.2" level="application" />
+    <orderEntry type="library" name="gson-2.8.2" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/OneDrive/Radna površina/Java/controlsfx-11.1.2/controlsfx-samples/src/main/java" />
+          <root url="file://$USER_HOME$/OneDrive/Radna površina/Java/controlsfx-11.1.2/controlsfx/src/main/java" />
+          <root url="file://$USER_HOME$/OneDrive/Radna površina/Java/controlsfx-11.1.2/controlsfx/src/test/java" />
+          <root url="file://$USER_HOME$/OneDrive/Radna površina/Java/controlsfx-11.1.2/fxsampler/src/main/java" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="google.code.gson" level="application" />
   </component>
 </module>

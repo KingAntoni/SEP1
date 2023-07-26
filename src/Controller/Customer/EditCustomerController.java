@@ -38,8 +38,8 @@ setCustomer(customer);
         emailTextBox.setText(customer.getEmail());
     }
 
-    public void reset() {
-        this.customerID=root.getUserData().toString();
+    public void reset(String customerID){
+
         Customer customer=modelManager.readCustomer(customerID);
         setCustomer(customer);
     }

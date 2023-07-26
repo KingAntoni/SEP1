@@ -1,9 +1,11 @@
 package FileHandler;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.BusType;
 import Model.Chauffeur;
 import com.google.gson.Gson;
 
@@ -22,10 +24,10 @@ public class ChauffeurFileHandler {
         saveAllChauffeurs(chauffeurs);
     }
 
-    public Chauffeur read(String name) {
+    public Chauffeur read(String phoneNumber) {
         List<Chauffeur> chauffeurs = getAllChauffeurs();
         for (Chauffeur chauffeur : chauffeurs) {
-            if (chauffeur.getName().equals(name)) {
+            if (chauffeur.getPhoneNumber().equals(phoneNumber)) {
                 return chauffeur;
             }
         }
@@ -44,11 +46,11 @@ public class ChauffeurFileHandler {
         }
     }
 
-    public void delete(String name) {
+    public void delete(String phoneNumber) {
         List<Chauffeur> chauffeurs = getAllChauffeurs();
         for (int i = 0; i < chauffeurs.size(); i++) {
             Chauffeur chauffeur = chauffeurs.get(i);
-            if (chauffeur.getName().equals(name)) {
+            if (chauffeur.getPhoneNumber().equals(phoneNumber)) {
                 chauffeurs.remove(i);
                 saveAllChauffeurs(chauffeurs);
                 return;
@@ -81,4 +83,9 @@ public class ChauffeurFileHandler {
             e.printStackTrace();
         }
     }
+    public List<Chauffeur> readAll() {
+        return getAllChauffeurs();
+    }
+
+
 }

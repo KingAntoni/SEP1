@@ -13,6 +13,7 @@
          <columns>
             <TableColumn fx:id="nameColumn" text="Name" />
             <TableColumn fx:id="preferencesColumn" text="Preferences" />
+            <TableColumn fx:id="phoneColumn" text="PhoneNo" />
          </columns>
       </TableView>
       <Text layoutX="367.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Chauffeur">

@@ -51,6 +51,16 @@ public class TripFileHandler {
         saveAllTrips(trips);
     }
 
+    public Trip readById(String id) {
+        List<Trip> trips = getAllTrips();
+        for (Trip trip : trips) {
+            if (trip.getTripID().equals(id)) {
+                return trip;
+            }
+        }
+        return null;
+    }
+
     private List<Trip> getAllTrips() {
         List<Trip> trips = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {

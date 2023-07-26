@@ -61,7 +61,6 @@ public class CustomerMainViewController {
     public void deleteCustomerButtonPressed(){
         modelManager.deleteCustomer(customerTableView.getSelectionModel().getSelectedItem().getEmail());
         reset();
-
     }
     public void reset() {
         customerTableView.getItems().clear();

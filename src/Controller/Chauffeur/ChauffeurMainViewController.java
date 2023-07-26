@@ -1,8 +1,11 @@
 package Controller.Chauffeur;
 
 import Controller.ViewHandler;
+import Model.Bus;
 import Model.Chauffeur;
 import Model.ModelManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,11 +23,21 @@ public class ChauffeurMainViewController {
     @FXML
     private TableColumn<Chauffeur, String> nameColumn;
     @FXML
-    private TableColumn<Chauffeur, String> preferenceColumn;
+    private TableColumn<Chauffeur, String> preferencesColumn;
+    @FXML
+    private TableColumn<Chauffeur, Integer> phoneColumn;
     public void init(ViewHandler viewHandler, ModelManager modelManager,Region root){
         this.viewHandler=viewHandler;
         this.modelManager=modelManager;
         this.root=root;
+
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        preferencesColumn.setCellValueFactory(cellData -> cellData.getValue().preferencesProperty());
+        phoneColumn.setCellValueFactory(cellData -> cellData.getValue().phoneNumberProperty().asObject());
+
+        ObservableList<Chauffeur> observableList = FXCollections.observableList(modelManager.readAllChauffeurs());
+
+        chauffeurTable.setItems(observableList);
     }
 
     @FXML
@@ -38,13 +51,16 @@ public class ChauffeurMainViewController {
     }
     @FXML
     public void editChauffeurButtonPressed(){
-        viewHandler.openView("editChauffeur");
+        viewHandler.openView("editChauffeur", chauffeurTable.getSelectionModel().getSelectedItem().getPhoneNumber());
     }
     @FXML
     public void deleteChauffeurButtonPressed(){
-
+        modelManager.deleteChauffeur(chauffeurTable.getSelectionModel().getSelectedItem().getPhoneNumber());
+        reset();
     }
     public void reset() {
+        ObservableList<Chauffeur> observableList = FXCollections.observableList(modelManager.readAllChauffeurs());
+        chauffeurTable.setItems(observableList);
     }
 
     public javafx.scene.layout.Region getRoot() {

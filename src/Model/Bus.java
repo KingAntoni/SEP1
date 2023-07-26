@@ -32,5 +32,8 @@ public class Bus {
         return name;
     }
 
+    public BusType getType() {
+        return type.get();
+    }
 }
 
