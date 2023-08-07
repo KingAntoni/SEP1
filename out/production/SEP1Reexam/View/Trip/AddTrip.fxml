@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="420.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Trip.AddTripController">
+   <children>
+      <TextField fx:id="customerEmailTextField" layoutX="37.0" layoutY="61.0" promptText="Customer Email" />
+      <DatePicker fx:id="departureDatePicker" layoutX="37.0" layoutY="116.0" promptText="Departure Date" />
+      <ChoiceBox fx:id="busTypeChoiceBox" layoutX="37.0" layoutY="175.0" prefWidth="150.0" />
+      <Button layoutX="36.0" layoutY="328.0" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
+      <ChoiceBox fx:id="chauffeurChoiceBox" layoutX="351.0" layoutY="276.0" prefWidth="150.0" />
+      <Button layoutX="511.0" layoutY="276.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
+      <Text layoutX="258.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Trip">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="351.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chauffeur" />
+      <Text layoutX="37.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bus Type" />
+      <Button layoutX="508.0" layoutY="328.0" mnemonicParsing="false" onAction="#addTripButtonPressed" text="Add Trip" />
+      <ChoiceBox fx:id="departureChoiceBox" layoutX="36.0" layoutY="229.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="arrivalChoiceBox" layoutX="36.0" layoutY="281.0" prefWidth="150.0" />
+      <Text layoutX="37.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departure Location" />
+      <Text layoutX="36.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrival Location" />
+      <TextField fx:id="numberOfDaysTextField" layoutX="351.0" layoutY="60.0" prefHeight="26.0" prefWidth="26.0" />
+      <Text layoutX="383.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of days" />
+      <Label fx:id="errorLabel" layoutX="337.0" layoutY="332.0"  textFill="RED" />
+   </children>
+</AnchorPane>

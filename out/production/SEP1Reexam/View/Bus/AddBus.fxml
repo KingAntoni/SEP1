@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Bus.AddBusController">
+   <children>
+      <Label layoutX="35.0" layoutY="66.0">Name:</Label>
+      <TextField fx:id="busNameTextBox" layoutX="35.0" layoutY="99.0" />
+      <Label layoutX="400.0" layoutY="66.0">Type:</Label>
+      <ChoiceBox fx:id="typeChoiceBox" layoutX="400.0" layoutY="99.0" />
+      <Label layoutX="35.0" layoutY="132.0">Licence Plate:</Label>
+      <TextField fx:id="busRegNumberTextBox" layoutX="35.0" layoutY="165.0" />
+      <Label layoutX="35.0" layoutY="198.0">Number of Seats:</Label>
+      <TextField fx:id="noSeatsTextBox" layoutX="35.0" layoutY="231.0" />
+      <Button layoutX="456.0" layoutY="300.0" mnemonicParsing="false" onAction="#saveBusButtonPressed" text="Add bus" />
+      <Text layoutX="423.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Bus">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button layoutX="52.0" layoutY="308.0" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" />
+      <Label fx:id="errorLabel" layoutX="456.0" layoutY="275.0"  textFill="RED"/>
+   </children>
+</AnchorPane>

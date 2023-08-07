@@ -1,0 +1,1 @@
+{"name":{"name":"","value":"Antonio Goreta","valid":true},"phoneNumber":{"name":"","value":"+4571849071","valid":true},"email":{"name":"","value":"agoreta1234@gmail.com","valid":true},"numberOfReservations":{"name":"","value":0,"valid":true}}
