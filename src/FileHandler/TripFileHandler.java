@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Customer;
 import Model.Trip;
 import com.google.gson.Gson;
 import java.time.format.DateTimeFormatter;
@@ -45,10 +46,16 @@ public class TripFileHandler {
         }
     }
 
-    public void delete(Trip trip) {
+    public void delete(String tripId) {
         List<Trip> trips = getAllTrips();
-        trips.remove(trip);
-        saveAllTrips(trips);
+        for (int i = 0; i < trips.size(); i++) {
+            Trip trip = trips.get(i);
+            if (trip.getTripID().equals(tripId)) {
+                trips.remove(i);
+                saveAllTrips(trips);
+                return;
+            }
+        }
     }
 
     public Trip readById(String id) {

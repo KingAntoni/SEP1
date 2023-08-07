@@ -1,1 +1,1 @@
-{"name":{"name":"","value":"DaBus","valid":true},"type":{"name":"","value":"PARTY_BUS","valid":true},"numberOfSeats":{"name":"","value":69,"valid":true},"regNumber":{"name":"","value":"42069","valid":true}}
+{"name":{"name":"","value":"Bus 1","valid":true},"type":{"name":"","value":"SCHOOL_BUS","valid":true},"numberOfSeats":{"name":"","value":50,"valid":true},"regNumber":{"name":"","value":"66278","valid":true}}

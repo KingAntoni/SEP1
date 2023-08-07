@@ -96,12 +96,13 @@ public class ModelManager {
         return tripFileHandler.readAll();
     }
 
-    public void updateTrip(Trip updatedTrip) {
-        tripFileHandler.update(updatedTrip);
+    public void updateTrip(String customerEmail, Chauffeur chauffeur, BusType busType, MyDate date, int numberOfDays , Location arrival, Location departure) {
+        Trip trip = new Trip(date,findBus(busType, date, numberOfDays) ,chauffeur, readCustomer(customerEmail) ,0,new Route(arrival , departure), numberOfDays);
+        tripFileHandler.update(trip);
     }
 
-    public void deleteTrip(Trip trip) {
-        tripFileHandler.delete(trip);
+    public void deleteTrip(String tripId) {
+        tripFileHandler.delete(tripId);
     }
 
     public List<Chauffeur> readAllChauffeurs() {

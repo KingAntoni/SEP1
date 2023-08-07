@@ -6,10 +6,7 @@ import Model.Chauffeur;
 import Model.Customer;
 import Model.ModelManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 
 import java.util.ArrayList;
@@ -31,6 +28,9 @@ public class EditChauffeurController {
     private CheckBox schoolBusCheckBox;
     @FXML
     private CheckBox regularBusCheckBox;
+    @FXML
+    private Label errorLabel;
+
     public void init(ViewHandler viewHandler, ModelManager modelManager,Region root,String chauffeurID){
         this.viewHandler=viewHandler;
         this.modelManager=modelManager;
@@ -53,22 +53,45 @@ public class EditChauffeurController {
 
         @FXML
     public void backButtonPressed(){
-        viewHandler.openView("ChauffeurMainView");
+        viewHandler.openView("chauffeurMainView");
     }
-@FXML
-public void saveChauffeurButtonPressed()
-{
-    ArrayList<BusType> busTypes = new ArrayList<>();
-    if(partyBusCheckBox.isSelected()){
-        busTypes.add(BusType.PARTY_BUS);
-    }if(schoolBusCheckBox.isSelected()){
-    busTypes.add(BusType.SCHOOL_BUS);
-}if(regularBusCheckBox.isSelected()){
-    busTypes.add(BusType.REGULAR_BUS);
-}
-    modelManager.updateChauffeur(new Chauffeur(firstNameTextBox.getText()+" "+lastNameTextBox.getText(),Integer.parseInt(phoneNumberTextBox.getText()),busTypes));
-    viewHandler.openView("chauffeurMainView");
-}
+    @FXML
+    public void saveChauffeurButtonPressed(){
+        // Check if any of the fields are empty or no bus type is selected
+        if (areFieldsEmpty() || !isBusTypeSelected()) {
+            // Show error message and deny permission to update the chauffeur
+            showErrorLabel("All fields must be filled.");
+        } else {
+            // Fields are not empty and bus type is selected, proceed with updating the chauffeur
+            ArrayList<BusType> busTypes = new ArrayList<>();
+            if(partyBusCheckBox.isSelected()){
+                busTypes.add(BusType.PARTY_BUS);
+            }if(schoolBusCheckBox.isSelected()){
+                busTypes.add(BusType.SCHOOL_BUS);
+            }if(regularBusCheckBox.isSelected()){
+                busTypes.add(BusType.REGULAR_BUS);
+            }
+            modelManager.updateChauffeur(new Chauffeur(firstNameTextBox.getText() + " " + lastNameTextBox.getText(), Integer.parseInt(phoneNumberTextBox.getText()), busTypes));
+            viewHandler.openView("chauffeurMainView");
+        }
+    }
+    private boolean areFieldsEmpty() {
+        // Check if any of the fields are empty
+        return firstNameTextBox.getText().isEmpty()
+                || lastNameTextBox.getText().isEmpty()
+                || phoneNumberTextBox.getText().isEmpty();
+    }
+    private boolean isBusTypeSelected() {
+        // Check if at least one bus type is selected
+        return partyBusCheckBox.isSelected()
+                || schoolBusCheckBox.isSelected()
+                || regularBusCheckBox.isSelected();
+    }
+    private void showErrorLabel(String message) {
+        // Show the error message in the errorLabel
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+    }
     public void reset(String chauffeurID) {
         Chauffeur chauffeur=modelManager.readChauffeur(chauffeurID);
         setChauffeur(chauffeur);

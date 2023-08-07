@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
@@ -30,6 +31,8 @@ public class AddTripController {
     ChoiceBox<Location> departureChoiceBox;
     @FXML
     TextField customerEmailTextField;
+    @FXML
+    private Label errorLabel;
 
     public void init(ViewHandler viewHandler, ModelManager modelManager,Region root){
         this.viewHandler=viewHandler;
@@ -58,6 +61,15 @@ public class AddTripController {
     }
 
     public void reset() {
+        errorLabel.setVisible(false);
+        errorLabel.setText("");
+        customerEmailTextField.setText("");
+        chauffeurChoiceBox.getSelectionModel().clearSelection();
+        busTypeChoiceBox.getSelectionModel().clearSelection();
+        departureDatePicker.setValue(null);
+        numberOfDaysTextField.setText("");
+        arrivalChoiceBox.getSelectionModel().clearSelection();
+        departureChoiceBox.getSelectionModel().clearSelection();
     }
 
     public javafx.scene.layout.Region getRoot() {
@@ -70,8 +82,33 @@ public class AddTripController {
     }
 
     @FXML
-    public void addTripButtonPressed() {
-        modelManager.createTrip (customerEmailTextField.getText(),chauffeurChoiceBox.getValue(),busTypeChoiceBox.getSelectionModel().getSelectedItem(), MyDate.fromLocalDate(departureDatePicker.getValue()),Integer.parseInt(numberOfDaysTextField.getText()),arrivalChoiceBox.getSelectionModel().getSelectedItem(),departureChoiceBox.getSelectionModel().getSelectedItem());
-        viewHandler.openView("tripMainView");
+    public void addTripButtonPressed(){
+        if (areFieldsEmpty() || !areChoiceBoxesSelected()) {
+            showErrorLabel("All fields must be filled.");
+        } else {
+            modelManager.createTrip (customerEmailTextField.getText(), chauffeurChoiceBox.getValue(),
+                    busTypeChoiceBox.getSelectionModel().getSelectedItem(),
+                    MyDate.fromLocalDate(departureDatePicker.getValue()),
+                    Integer.parseInt(numberOfDaysTextField.getText()),
+                    arrivalChoiceBox.getSelectionModel().getSelectedItem(),
+                    departureChoiceBox.getSelectionModel().getSelectedItem());
+            viewHandler.openView("tripMainView");
+        }
+    }
+    private boolean areFieldsEmpty() {
+        return customerEmailTextField.getText().isEmpty()
+                || departureDatePicker.getValue() == null
+                || numberOfDaysTextField.getText().isEmpty();
+    }
+    private boolean areChoiceBoxesSelected() {
+        return chauffeurChoiceBox.getValue() != null
+                && busTypeChoiceBox.getSelectionModel().getSelectedItem() != null
+                && arrivalChoiceBox.getSelectionModel().getSelectedItem() != null
+                && departureChoiceBox.getSelectionModel().getSelectedItem() != null;
+    }
+    private void showErrorLabel(String message) {
+        // Show the error message in the errorLabel
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 }

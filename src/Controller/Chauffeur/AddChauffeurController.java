@@ -30,6 +30,9 @@ public class AddChauffeurController {
     private CheckBox schoolBusCheckBox;
     @FXML
     private CheckBox regularBusCheckBox;
+    @FXML
+    private Label errorLabel;
+
     public void init(ViewHandler viewHandler, ModelManager modelManager,Region root){
         this.viewHandler=viewHandler;
         this.modelManager=modelManager;
@@ -39,16 +42,37 @@ public class AddChauffeurController {
 
     @FXML
     public void addChauffeurButtonPressed(){
-        ArrayList<BusType> busTypes = new ArrayList<>();
-        if(partyBusCheckBox.isSelected()){
-            busTypes.add(BusType.PARTY_BUS);
-        }if(schoolBusCheckBox.isSelected()){
-            busTypes.add(BusType.SCHOOL_BUS);
-        }if(regularBusCheckBox.isSelected()){
-            busTypes.add(BusType.REGULAR_BUS);
+        if (areFieldsEmpty() || !isBusTypeSelected()) {
+            showErrorLabel("All fields must be filled.");
+        } else {
+            ArrayList<BusType> busTypes = new ArrayList<>();
+            if(partyBusCheckBox.isSelected()){
+                busTypes.add(BusType.PARTY_BUS);
+            }if(schoolBusCheckBox.isSelected()){
+                busTypes.add(BusType.SCHOOL_BUS);
+            }if(regularBusCheckBox.isSelected()){
+                busTypes.add(BusType.REGULAR_BUS);
+            }
+            modelManager.createChauffeur(new Chauffeur(firstNameTextBox.getText() + " " + lastNameTextBox.getText(), Integer.parseInt(phoneNumberTextBox.getText()), busTypes));
+            viewHandler.openView("chauffeurMainView");
         }
-        modelManager.createChauffeur(new Chauffeur(firstNameTextBox.getText()+" "+lastNameTextBox.getText(),Integer.parseInt(phoneNumberTextBox.getText()),busTypes));
-        viewHandler.openView("chauffeurMainView");
+    }
+
+    private boolean areFieldsEmpty() {
+        return firstNameTextBox.getText().isEmpty()
+                || lastNameTextBox.getText().isEmpty()
+                || phoneNumberTextBox.getText().isEmpty();
+    }
+
+    private boolean isBusTypeSelected() {
+        return partyBusCheckBox.isSelected()
+                || schoolBusCheckBox.isSelected()
+                || regularBusCheckBox.isSelected();
+    }
+
+    private void showErrorLabel(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 
     @FXML

@@ -1,1 +1,1 @@
-{"name":{"name":"","value":"Antobi g","valid":true},"preferences":[{"name":"","value":"PARTY_BUS","valid":true}],"phoneNumber":{"name":"","value":525877,"valid":true}}
+{"name":{"name":"","value":"Antonio Goreta","valid":true},"preferences":[{"name":"","value":"SCHOOL_BUS","valid":true}],"phoneNumber":{"name":"","value":71849071,"valid":true}}

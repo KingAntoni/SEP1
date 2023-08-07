@@ -2,12 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Chauffeur.AddChauffeurController">
+<AnchorPane prefHeight="430.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Chauffeur.AddChauffeurController">
    <children>
       <Button layoutX="489.0" layoutY="324.0" mnemonicParsing="false" onAction="#addChauffeurButtonPressed" text="Add Chauffeur" />
       <TextField fx:id="firstNameTextBox" layoutX="37.0" layoutY="65.0" promptText="First name" />
@@ -22,5 +23,6 @@
       <CheckBox fx:id="partyBusCheckBox" layoutX="37.0" layoutY="200.0" mnemonicParsing="false" text="Party Bus" />
       <CheckBox fx:id="schoolBusCheckBox" layoutX="38.0" layoutY="232.0" mnemonicParsing="false" text="School Bus" />
       <CheckBox fx:id="regularBusCheckBox" layoutX="39.0" layoutY="264.0" mnemonicParsing="false" text="Regular Bus" />
+      <Label fx:id="errorLabel" layoutX="489.0" layoutY="307.0"  textFill="RED"/>
    </children>
 </AnchorPane>

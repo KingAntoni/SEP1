@@ -64,7 +64,8 @@ public class TripMainViewController {
 
     @FXML
     public void deleteTripButtonPressed(){
-       reset();
+        modelManager.deleteTrip(tripTableView.getSelectionModel().getSelectedItem().getTripID());
+        reset();
     }
 
     @FXML
