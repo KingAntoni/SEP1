@@ -134,11 +134,6 @@ public class ModelManager {
 
     // Helper method to check if a chauffeur is available on a given date for a specific duration
     private boolean isChauffeurAvailable(Chauffeur chauffeur, MyDate selectedDate, int tripDuration) {
-        // Assuming chauffeur availability is checked against their existing schedule
-        // You might have some other mechanism to check availability (e.g., from a database)
-
-        // For demonstration purposes, let's a soon the chauffeur is available if there are no conflicting trips
-        // within the specified duration from the selected date
         for (Trip trip : getTripsForChauffeur(chauffeur)) {
             if (trip.getDateTime().isEqual(selectedDate) || trip.getDateTime().isAfter(selectedDate)) {
                 if (trip.getDateTime().isBefore(selectedDate.plusDays(tripDuration))) {
@@ -165,9 +160,6 @@ public class ModelManager {
     }
     private Bus findBus(BusType busType, MyDate date, int numberOfDays) {
         List<Bus> buses = readAllBuses();
-
-
-        // Find available chauffeurs for each day of the trip
         for (Bus bus : buses) {
                 if (isBusAvailable(bus, date, numberOfDays)) {
                     return bus;
